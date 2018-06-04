@@ -13,10 +13,10 @@ namespace LakewoodVolunteerCorp.DAL
         {
             var volunteers = new List<Volunteer>
             {
-            new Volunteer{FirstName="Jeff",LastName="Katz",SignUpDate=DateTime.Parse("2018-05-08")},
-            new Volunteer{FirstName="Marlene",LastName="Greene",SignUpDate=DateTime.Parse("2018-05-01")},
+            new Volunteer{FirstName="Jeff",LastName="Katz",SignUpDate=DateTime.Parse("2018-05-15")},
+            new Volunteer{FirstName="Marlene",LastName="Greene",SignUpDate=DateTime.Parse("2018-05-11")},
             new Volunteer{FirstName="Axel",LastName="White",SignUpDate=DateTime.Parse("2018-05-11")},
-            new Volunteer{FirstName="Gary",LastName="Jackson",SignUpDate=DateTime.Parse("2018-05-20")},
+            new Volunteer{FirstName="Gary",LastName="Jackson",SignUpDate=DateTime.Parse("2018-05-11")},
             new Volunteer{FirstName="Sue",LastName="Franks",SignUpDate=DateTime.Parse("2018-05-17")},
             new Volunteer{FirstName="Mark",LastName="Long",SignUpDate=DateTime.Parse("2018-05-09")},
             new Volunteer{FirstName="April",LastName="Maynard",SignUpDate=DateTime.Parse("2018-05-15")}

@@ -3,11 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using LakewoodVolunteerCorp.DAL;
+using LakewoodVolunteerCorp.ViewModels;
 
 namespace LakewoodVolunteerCorp.Controllers
 {
     public class HomeController : Controller
     {
+        private NonProfitContext db = new NonProfitContext();
+
         public ActionResult Index()
         {
             return View();
@@ -15,14 +19,25 @@ namespace LakewoodVolunteerCorp.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
+            IQueryable<SignUpDateGroup> data = from volunteer in db.Volunteers
+                                                   group volunteer by volunteer.SignUpDate into dateGroup
+                                                   select new SignUpDateGroup()
+                                                   {
+                                                       SignUpDate = dateGroup.Key,
+                                                       VolunteerCount = dateGroup.Count()
+                                                   };
+            return View(data.ToList());
+        }
 
-            return View();
+        protected override void Dispose(bool disposing)
+        {
+            db.Dispose();
+            base.Dispose(disposing);
         }
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
+            ViewBag.Message = "Please let us know if you would like to volunteer!";
 
             return View();
         }

@@ -16,9 +16,33 @@ namespace LakewoodVolunteerCorp.Controllers
         private NonProfitContext db = new NonProfitContext();
 
         // GET: Volunteer
-        public ActionResult Index()
+        public ActionResult Index(string sortOrder, string searchString)
         {
-            return View(db.Volunteers.ToList());
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewBag.DateSortParm = sortOrder == "Date" ? "date_desc" : "Date";
+            var volunteers = from s in db.Volunteers
+                           select s;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                volunteers = volunteers.Where(s => s.LastName.Contains(searchString)
+                                       || s.FirstName.Contains(searchString));
+            }
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    volunteers = volunteers.OrderByDescending(s => s.LastName);
+                    break;
+                case "Date":
+                    volunteers = volunteers.OrderBy(s => s.SignUpDate);
+                    break;
+                case "date_desc":
+                    volunteers = volunteers.OrderByDescending(s => s.SignUpDate);
+                    break;
+                default:
+                    volunteers = volunteers.OrderBy(s => s.LastName);
+                    break;
+            }
+            return View(volunteers.ToList());
         }
 
         // GET: Volunteer/Details/5

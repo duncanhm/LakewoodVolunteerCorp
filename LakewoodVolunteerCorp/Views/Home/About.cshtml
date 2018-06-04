@@ -1,7 +1,30 @@
-﻿@{
-    ViewBag.Title = "About";
-}
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
+﻿@model IEnumerable<LakewoodVolunteerCorp.ViewModels.SignUpDateGroup>
 
-<p>Use this area to provide additional information.</p>
+@{
+    ViewBag.Title = "Volunteer Statistics";
+}
+
+<h2>Volunteer Statistics</h2>
+
+<table>
+    <tr>
+        <th>
+            Sign Up Date
+        </th>
+        <th>
+            Volunteers
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.SignUpDate)
+            </td>
+            <td>
+                @item.VolunteerCount
+            </td>
+        </tr>
+    }
+</table>
